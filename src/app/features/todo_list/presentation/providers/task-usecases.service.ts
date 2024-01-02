@@ -5,6 +5,7 @@ import { TaskRepositoryImpl } from '../../infrastructure/repositories/task_respo
 import { TaskDataSource } from '../../domain/datasource/task_datasource/task.datasource';
 import { TaskRemoteDataSource } from '../../infrastructure/datasource/remote/task_datasource/task.datasource_impl';
 import { GetTasksUseCase } from '../../domain/usecases/get_tasks.usecase';
+import { TaskLocalDataSource } from '../../infrastructure/datasource/local/task_datasource/task.datasoruce_impl';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,8 @@ export class TaskUseCasesService {
   private datasource: TaskDataSource;
 
   constructor(private httpClient: HttpClient) {
-    this.datasource = new TaskRemoteDataSource(this.httpClient);
+    // this.datasource = new TaskRemoteDataSource(this.httpClient);
+    this.datasource = new TaskLocalDataSource();
     this.repository = new TaskRepositoryImpl(this.datasource);
   }
 
